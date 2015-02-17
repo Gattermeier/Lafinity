@@ -84,6 +84,7 @@ schema.plugin(createdDate);
 // when new scripts are created, lets do something
 // npm install mongoose-lifecycle
 // http://plugins.mongoosejs.com?q=events
+
 var lifecycle = require('mongoose-lifecycle');
 schema.plugin(lifecycle);
 

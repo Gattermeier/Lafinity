@@ -106,8 +106,8 @@ module.exports = function (app) {
             // write script file
             //constructScript(script);
 
-            var msg = 'Saved.';
-            res.redirect('/script/edit/' + script.id, msg);
+            //var msg = 'Saved.';
+            res.redirect('/script/edit/' + script.id);
         });
     })
 
