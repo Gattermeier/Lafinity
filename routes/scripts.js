@@ -151,8 +151,7 @@ module.exports = function (app) {
 
             //res.render('script/create.jade',{msg: 'Saved.'});
             res.render('script/create.jade', {
-                script: Script.findById(req.param('id')),
-                message: 'Saved.'
+                script: Script.findById(req.param('id'))
             });
         })
     })
