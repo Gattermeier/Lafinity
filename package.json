@@ -1,14 +1,11 @@
 {
-  "name": "week7",
+  "name": "Lafinity",
   "private": true,
-  "version": "0.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+  "version": "0.0.1",
+  "description": "Providing Marketing Overlays Non-For Profits",
+  "main": "app.js",
   "author": "",
-  "license": "BSD",
+  "license": "",
   "dependencies": {
     "mongoose": "~3.6.15",
     "express": "~3.3.4",
