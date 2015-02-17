@@ -1,0 +1,71 @@
+extends layout
+
+block content
+  if session.isLoggedIn
+    h1 Dashboard
+    h3 Get started
+    br
+    table.table
+      tr
+        td.hidden-xs.col-sm-3.col-md-2
+          span.glyphicon.glyphicon-bullhorn(style='font-size:4em;margin:.4em;')
+        td.col-xs-12.col-sm-6.col-md-6
+          h4 Create a marketing overlay
+          p A simple way to embed a overlay lightbox on your website, encouraging your visitors to take a desired action. &nbsp;
+            span This is great for end of the year fundraising, allowing for complex and automated setups.
+        td.col-xs-12.col-sm-3.col-md-4
+          a(href="/script/create").btn.btn-lg.btn-default Setup a Lightbox
+            //span.glyphicon.glyphicon-chevron-right
+      tr
+        td.hidden-xs.col-sm-3.col-md-2
+          span.glyphicon.glyphicon-tasks(style='font-size:4em;margin:.4em;')
+        td.col-xs-12.col-sm-6.col-md-6
+          h4 Create a new poll
+          p Ask the right questions with polls on your website. A super simple and super fast way of creating ana amanaging pplls. &nbsp;
+          //span also great for letting people sign up for your newsletter or signing a pedition
+        td.col-xs-12.col-sm-3.col-md-4
+          a(href="/polls/create").btn.btn-lg.btn-default Create a Poll
+            //span.glyphicon.glyphicon-chevron-right
+      tr
+        td.hidden-xs.col-sm-3.col-md-2
+
+        td.col-xs-12.col-sm-6.col-md-6
+          h4 Create a new mobile footer
+          p Add a custom footer to your website which displays only on mobile devices. &nbsp;
+            span This is a great way to quickly include a dynamic, conditional call to action for your mobile audience.
+          //span also great for letting people sign up for your newsletter or signing a pedition
+        td.col-xs-12.col-sm-3.col-md-4
+          a(href="/mobile/create").btn.btn-lg.btn-default Create a Mobile Footer
+            //span.glyphicon.glyphicon-chevron-right
+
+  else
+    div.row
+      div.jumbotron
+        h1 Lambda Infinity
+
+        p Modern fundraising and constituency engagement tools for non-profits and political entities.
+          br Learn more about and talk to us about our custom services or create your free account today to test drive our products.
+
+        a.btn.btn-lg.btn-warning(href="/signup", role="button") Sign Up for free
+    .row
+      .col-xs-12
+        h2 Services
+        span Quisque risus purus, mattis et rhoncus a, ornare sit amet justo. Donec tempor vestibulum dui, nec efficitur magna. Phasellus elementum porta fermentum. Cras mattis eu neque nec cursus. Sed aliquet feugiat purus eleifend mattis. Etiam id magna nibh. Aenean eros mi, commodo molestie purus id, luctus tempor augue. Morbi eget justo ex. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam fermentum venenatis auctor.
+    .row
+      .col-xs-12
+        h2 Tools
+        span Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque bibendum magna quis ultricies dapibus. Nullam consequat nulla felis, elementum tempus metus lacinia eget. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Etiam mi ipsum, pretium sit amet tristique ut, consequat vitae diam. Morbi ut mollis est, a rutrum velit. Nulla facilisi. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Quisque non magna nisi. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Duis eu sodales ex. Integer fermentum quam vel egestas pulvinar.
+    //.row
+      .col-xs-12
+        h2 Rules
+        span Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque bibendum magna quis ultricies dapibus. Nullam consequat nulla felis, elementum tempus metus lacinia eget. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Etiam mi ipsum, pretium sit amet tristique ut, consequat vitae diam. Morbi ut mollis est, a rutrum velit. Nulla facilisi. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Quisque non magna nisi. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Duis eu sodales ex. Integer fermentum quam vel egestas pulvinar.
+
+
+  if session.isAdmin
+    hr
+    .alert.alert-warning
+      h4 Debug / Dev
+      if session.isAdmin
+        span admin
+      else
+        span not admin

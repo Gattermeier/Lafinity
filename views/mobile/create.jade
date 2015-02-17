@@ -1,0 +1,33 @@
+//
+   Created by matthias on 1/7/15.
+
+extends ../layout
+block content
+  action = mobile ? "/mobile/edit/"+mobile.id : "/mobile/create";
+  title = mobile ? mobile.title : '';
+  position = mobile ? mobile.position : 'top';
+  mobile_id = mobile ? mobile.id : '';
+
+  div.row
+     div.col-xs-12.col-sm-6
+         p= mobile_id
+         //span= mobile.created.toGMTString()
+         //p by #{mobile.author.id}
+         form(method="post", action=action)
+            h2 Mobile Bar
+            .row
+              .form-group.col-xs-9.col-sm-9
+                 label(for="title") Name
+                 input#title(
+                 name="title",
+                 value=title,
+                 class='form-control'
+                 )
+              .form-group.col-xs-3.col-sm-3
+                 label(for="position") Position
+                 select.form-control(
+                 name="position",
+                 value='position')
+                    option top
+                    option bottom
+            input(type="submit", value="Save", class="btn btn-primary")

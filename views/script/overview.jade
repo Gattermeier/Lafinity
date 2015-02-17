@@ -1,0 +1,26 @@
+//
+   Created by matthias on 1/8/15.
+extends ../layout
+
+block content
+   if session.isLoggedIn
+      a.btn.btn-primary(href="/script/create") Create
+
+      if !(scripts && scripts.length)
+         p No modal scripts yet created.
+      else
+         h3 Available Modals
+         table.table.table-hover
+            each script in scripts
+               tr
+                  td.col-xs-6.col-sm-8.col-md-9
+                     p= script.title
+                  td.col-xs-6.col-sm-4.col-md-3
+                     a(href="/script/edit/#{script.id}", class='btn btn-warning', style='margin-right:5px;')
+                        span.glyphicon.glyphicon-pencil(aria-hidden="true")
+                        span &nbsp; View & Edit
+                     a(href="/script/remove/#{script.id}", class='btn btn-danger')
+                        span.glyphicon.glyphicon-trash(aria-hidden="true")
+                        span &nbsp; Delete
+   else
+      p please login

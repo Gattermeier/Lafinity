@@ -1,0 +1,33 @@
+//
+   Created by matthias on 1/14/15.
+
+extends ../layout
+
+block content
+
+   action = rules ? "/rules/edit/"+rules.id : "/rules/create";
+   title = rules ? rules.title : '';
+   rules_id = rules ? rules.id : '';
+
+   .row
+      .col-xs-12.col-sm-6
+         p= rules_id
+         //span= mobile.created.toGMTString()
+         //p by #{mobile.author.id}
+         form(method="post", action=action)
+            h2 Rules
+            .row
+               .form-group.col-xs-9.col-sm-9
+                  label(for="title") Name
+                  input#title(
+                  name="title",
+                  value=title,
+                  class='form-control'
+                  )
+            input(type="submit", value="Save", class="btn btn-primary")
+   .row
+      span not yet implemented.
+      p
+         span Set up conditions in pattern:
+         br
+         span show / hide if condition1 and / or condition2 , etc -> give condition a name

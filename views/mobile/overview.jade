@@ -1,0 +1,26 @@
+//
+   Created by matthias on 1/8/15.
+extends ../layout
+
+block content
+   if session.isLoggedIn
+      a.btn.btn-primary(href="/mobile/create") Create
+
+      if !(mobiles && mobiles.length)
+         p No mobile footers yet created.
+      else
+         h3 Available Mobile Footers
+         table.table.table-hover
+            each mobile in mobiles
+               tr
+                  td.col-xs-6.col-sm-8.col-md-9
+                     p= mobile.title
+                  td.col-xs-6.col-sm-4.col-md-3
+                     a(href="/mobile/edit/#{mobile.id}", class='btn btn-warning', style='margin-right:5px;')
+                        span.glyphicon.glyphicon-pencil(aria-hidden="true")
+                        span &nbsp; View & Edit
+                     a(href="/mobile/remove/#{mobile.id}", class='btn btn-danger')
+                        span.glyphicon.glyphicon-trash(aria-hidden="true")
+                        span &nbsp; Delete
+   else
+      p please login

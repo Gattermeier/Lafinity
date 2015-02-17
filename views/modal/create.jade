@@ -1,0 +1,20 @@
+//
+   Created by matthias on 1/6/15.
+
+extends ../layout
+block content
+   action = modal ? "/modal/"+modal.id : "/modal/create";
+   title = modal ? modal.title : ''
+   //modal_title_text = modal ? modal.modal_title : ''
+   //- if (modal.modal_title && modal.modal_title.text)
+     modal_title_text = JSON.stringify(modal.modal_title.text)
+     - else
+     modal_title_text = ''
+   form(method="post", action=action)
+      .form-group.col-xs-9.col-sm-9
+         label(for="title") Name
+         input#title(name="title", value=title, class='form-control')
+      .form-group.col-xs-9.col-sm-9
+         label(for="modal_title_text") Headline
+         input#modal_title_text(name="modal_title_text", value=modal_title_text, class='form-control')
+      input(type="submit", value="Save", class="btn btn-primary")

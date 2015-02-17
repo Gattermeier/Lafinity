@@ -1,0 +1,7 @@
+//
+   Created by matthias on 1/8/15.
+extends layout
+
+block content
+   if session.isLoggedIn
+      .error.alert.alert-danger Error, seems you don't have the permission to do that ..

@@ -1,0 +1,38 @@
+//
+   Created by matthias on 1/7/15.
+
+extends ../layout
+action = "/profile/"
+first = session.username.first
+last = session.username.last
+
+block content
+
+   .row
+      .col-xs-12.col-sm-6
+         if success
+            .alert.alert-success Profile saved.
+         h1 User Profile
+         p='Email: ' + session.user
+         form(method="post", action=action)
+            .row
+               .form-group.col-xs-12.col-sm-12
+                  label(for="first") First Name
+                  input#first(
+                  name="first",
+                  value=session.username.first,
+                  class='form-control'
+                  )
+               .form-group.col-xs-12.col-sm-12
+                  label(for="last") Last Name
+                  input#last(
+                  name="last",
+                  value=session.username.last,
+                  class='form-control'
+                  )
+            input(type="submit", value="Save", class="btn btn-primary")
+
+
+
+
+

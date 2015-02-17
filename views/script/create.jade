@@ -1,0 +1,206 @@
+
+extends ../layout
+
+block content
+  action = script ? "/script/edit/"+script.id : "/script/create";
+  title = script ? script.title : ''
+  script_title = script ? script.script_title : ''
+  script_title_tag = script ? script.script_title_tag : 'H1'
+  script_message = script ? script.script_message : ''
+  script_image_url = script ? script.script_image_url : ''
+  script_image_position = script ? script.script_image_position : 'top'
+  script_button_text = script ? script.script_button_text : ''
+  script_link_httptype = script ? script.script_link_httptype : 'http://'
+  script_button_url = script ? script.script_button_url : ''
+  script_button_align = script ? script.script_button_align : 'btn-block'
+  script_button_color = script ? script.script_button_color : 'btn-danger'
+  script_button_font = script ? script.script_button_font : 'default'
+  script_button_tag = script ? script.script_button_tag : ''
+  script_button_classes = script ? script.script_button_classes : ''
+  script_cookie_expiration = script ? script.script_cookie_expiration : '0'
+  script_live = script ? script.id : ''
+
+  script(type="text/javascript").
+    var preview = angular.module("preview",[]);
+
+    preview.controller("previewController",function($scope){
+      $scope.scope_script_title = "#{script_title}";
+      $scope.scope_script_title_tag = "#{script_title_tag}";
+      $scope.scope_script_message = "#{script_message}";
+      $scope.scope_script_image_url = "#{script_image_url}";
+      $scope.scope_script_image_position = "#{script_image_position}";
+      $scope.scope_script_button_text = "#{script_button_text}";
+      $scope.scope_script_button_url = "#{script_button_url}";
+      $scope.scope_script_button_align = "#{script_button_align}";
+      $scope.scope_script_button_color = "#{script_button_color}";
+      $scope.scope_script_button_font = "#{script_button_font}";
+    });
+
+  div.row(ng-app='preview', ng-controller='previewController')
+    div.col-xs-12.col-sm-6
+      if message
+        .info.alert.alert-success=message
+      .info.alert.alert-info Please add following line before the </body> closing tage to your page: < script src=' public/lafinity.js?lf_id=#{script_live}'></script >
+
+      form(method="post", action=action)
+
+        h2 Configuration
+        .row
+          .form-group.col-xs-9.col-sm-9
+            label(for="title") Name
+            input#title(
+            name="title",
+            value=title,
+            class='form-control'
+            )
+
+          .form-group.col-xs-6.col-sm-4
+            label(for="script_cookie_expiration") Freqency in hours
+            input#script_cookie_expiration(
+            name="script_cookie_expiration",
+            value=script_cookie_expiration,
+            class='form-control')
+          .form-group.col-xs-6.col-sm-6
+            label Status
+            .checkbox
+              label
+                input(type='checkbox')
+                | make this modal script live
+        h2 Modal Content
+        .row
+          .form-group.col-xs-9.col-sm-9
+            label(for="script_title") Headline
+            input#script_title(
+            name="script_title",
+            value=script_title,
+            class='form-control',
+            ng-model='script_title',
+            ng-init='script_title = scope_script_title')
+          .form-group.col-xs-3.col-sm-3
+            label(for="script_title_tag") HTML Element
+            select.form-control(
+            name="script_title_tag",
+            value='script_title_tag',
+            ng-model='script_title_tag',
+            ng-init='script_title_tag = scope_script_title_tag')
+              option H1
+              option H2
+              option H3
+        .row
+          .form-group.col-xs-9.col-sm-9
+            label(for="script_image_url") Image URL
+            input#script_image_url(
+            name="script_image_url",
+            value=script_image_url,
+            class='form-control',
+            ng-model='script_image_url',
+            ng-init='script_image_url = scope_script_image_url')
+          .form-group.col-xs-3.col-sm-3
+            label(for="script_image_position") Image Position
+            select.form-control(
+            name="script_image_position",
+            value=script_image_position,
+            ng-model='script_image_position',
+            ng-init='script_image_position = scope_script_image_position')
+              option(value='top') above text
+              option(value='bottom') beneath text
+        .form-group
+          label(for="script_message") Message
+          textarea#script_message(
+          name="script_message",
+          class='form-control',
+          ng-model='script_message',
+          ng-init='script_message = scope_script_message') = script_message
+
+        .row
+          .form-group.col-xs-12.col-sm-4
+            label(for="script_button_text") Button Text
+            input#script_button_text(
+            name="script_button_text",
+            value=script_button_text,
+            class='form-control',
+            ng-model='script_button_text',
+            ng-init='script_button_text = scope_script_button_text')
+          .form-group.col-xs-4.col-sm-3
+            label(for="script_link_httptype") Protocol
+            select.form-control(
+            name="script_link_httptype",
+            value='script_link_httptype')
+              option http://
+              option https://
+          .form-group.col-xs-12.col-sm-5
+            label(for="script_button_url") Target URL
+            input#script_button_url(
+            name="script_button_url",
+            value=script_button_url,
+            class='form-control',
+            ng-model='script_button_url',
+            ng-init='script_button_url = scope_script_button_url')
+          .row
+          .form-group.col-xs-12.col-sm-4
+            label(for="script_button_align") Button Alignment
+            select.form-control(
+            name="script_button_align",
+            value='script_button_align',
+            ng-model='script_button_align',
+            ng-init='script_button_align = scope_script_button_align')
+              option(value='btn-block') Block
+              option(value='right') Right
+              option(value='left') Left
+          .form-group.col-xs-4.col-sm-3
+            label(for="script_button_color") Color Schema
+            select.form-control(
+            name="script_button_color",
+            value='script_button_color',
+            ng-model='script_button_color',
+            ng-init='script_button_color = scope_script_button_color')
+              option(value='btn-danger') Red
+              option(value='btn-primary') Blue
+              option(value='btn-warning') Orange
+              option(value='btn-success') Green
+              option(value='btn-default') Grey
+          .form-group.col-xs-12.col-sm-5
+            label(for="script_button_font") Font Style
+            select.form-control(
+            name="script_button_font",
+            value='script_button_font',
+            ng-model='script_button_font',
+            ng-init='script_button_font = scope_script_button_font')
+              option(value='default') Default
+              option(value='btn-lg') Large
+              option(value='btn-sm') Small
+              option(value='btn-xs') Extra Small
+
+          //.form-group.col-xs-12.col-sm-4
+            label(for="text") Button Text
+            input#script_button_text(name="text", value=text, class='form-control', ng-model='text', ng-init='script_button_text = text')
+          //.form-group.col-xs-12.col-sm-5
+            label(for="url") Link
+            input#script_button_text(name="url", value=text, class='form-control', ng-model='url', ng-init='script_button_text = url')
+
+        h2 Conditions
+        .row
+          span.col-xs-12 to add: rules & conditions (returning visitors, etc), hide on pages, etc
+          .form-group.col-xs-12.col-sm-5
+            select.form-control(
+            name='show')
+                option(value='show') show on
+                option(value='hide') hide on
+            p following
+
+        input(type="submit", value="Save", class="btn btn-primary")
+    div.col-sm-6.hidden-xs.preview
+      //h2 Preview
+      h3 Start typing to see the modal preview
+      p Please note: HTML elements do not yet fully preview (headline, button, etc)
+      div.backdrop
+        div.dialog
+          div.content
+            div.header
+              div(class='{{script_title_tag}}') {{script_title}}
+            div.body
+              p
+                img(ng-src="{{scope_script_image_url}}", class="img-responsive")
+              p {{scope_script_message}}
+            div.footer
+              a(href='#', class='btn {{script_button_align}} {{script_button_font}} {{script_button_color}}') {{script_button_text}}

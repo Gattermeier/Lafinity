@@ -1,0 +1,18 @@
+extends layout
+
+block content
+  .row
+    form(method='post', action='/login', enctype='application/x-www-form-urlencoded')
+      div.col-xs-12.col-sm-6.col-md-4
+        h3 Log in
+        if invalid
+          .error.alert.alert-danger Please enter a valid email address and password.
+        div.form-group
+          label(for='email') Email
+          input#email(name='email', class='form-control')
+        div.form-group
+          label(for='pass') Password
+          input#pass(name='pass', type='password', class='form-control')
+        input(type='submit', value='Log In', class="btn btn-primary")
+        a.btn.btn-warning(href="/signup", style='margin-left:10px;') Create Account
+

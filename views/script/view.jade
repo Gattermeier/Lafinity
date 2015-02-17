@@ -1,0 +1,35 @@
+//
+   Created by matthias on 1/2/15.
+
+extends ../layout
+block content
+   h1 Debug Info
+   p= 'Entry Title' + script.title
+   p= script.id
+   span= script.created.toGMTString()
+   p by #{script.author.id}
+   div
+      if session.isLoggedIn
+         a(href="/script/edit/" + script.id) Edit
+         span &nbsp; | &nbsp;
+         a(href="/script/remove/" + script.id) Delete
+   hr
+   p= 'Title: '+script.script_title
+   p= 'Title HTML tag: ' +script.script_title_tag
+   p= 'Image URL: ' + script.script_image_url
+   p= 'Image Position: ' + script.script_image_position
+   p= 'Image Message: ' + script.script_message
+   p= 'Button Text: ' + script.script_button_text
+   p= 'Link type: ' + script.script_link_httptype
+   p= 'Link: ' + script.script_button_url
+   p= 'Button Align: ' + script.script_button_align
+   p= 'Button Color: ' + script.script_button_color
+   p= 'Button font: ' + script.script_button_font
+
+   hr
+   span Copy this file as script into your website:
+   br
+   a(href="/public/api/" + script.id + '.js')="public/api/" + script.id + ".js"
+   br
+   span.future="Dependencies: jquery, jquery.cookie, bootstrap 3"
+

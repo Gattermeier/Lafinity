@@ -1,0 +1,26 @@
+//
+   Created by matthias on 1/8/15.
+extends ../layout
+
+block content
+   if session.isLoggedIn
+      a.btn.btn-primary(href="/rules/create") Create a new rule
+
+      if !(rules && rules.length)
+         p No rules yet created.
+      else
+         h3 Existing Rules
+         table.table.table-hover
+            each rule in rules
+               tr
+                  td.col-xs-6.col-sm-8.col-md-9
+                     p= rule.title
+                  td.col-xs-6.col-sm-4.col-md-3
+                     a(href="/rules/edit/#{rule.id}", class='btn btn-warning', style='margin-right:5px;')
+                        span.glyphicon.glyphicon-pencil(aria-hidden="true")
+                        span &nbsp; View & Edit
+                     a(href="/rules/remove/#{rule.id}", class='btn btn-danger')
+                        span.glyphicon.glyphicon-trash(aria-hidden="true")
+                        span &nbsp; Delete
+   else
+      p please login
