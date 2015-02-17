@@ -36,7 +36,7 @@ module.exports = function (app) {
         user.salt = bytes.toString('utf8');
         user.hash = hash(pass, user.salt);
         user.name = {first : first, last : last};
-        user.roles = ['admin'];
+        //user.roles = ['admin']; // messy way of signing up first user in db as admin.
 
 
         User.create(user, function (err, newUser) {
