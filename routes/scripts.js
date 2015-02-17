@@ -12,44 +12,6 @@ function replaceAll(str, search, replace) {
     return str.replace(new RegExp(search, 'g'), replace);
 }
 
-// constructScript not in use anymore, should be cleaned out..
-function constructScript(script) {
-
-    // Read the basic template file to create a custom script
-    fs.readFile('./api/gamma.js', 'utf8', function (err, data) {
-        if (err) {
-            return console.log(err);
-        }
-
-        // values to replace as JSON object
-        var construct =
-        {
-            "<%MODALCOOKIE%>": script.id
-            , "<%MODALID%>": script.id
-            , "<%HOURS%>": script.script_cookie_expiration
-            , "<%SCRIPT_TITLE%>": script.script_title
-            , "<%SCRIPT_MESSAGE%>": script.script_message
-            , "<%SCRIPT_BUTTON_TEXT%>": script.script_button_text
-            , "<%SCRIPT_BUTTON_URL%>": script.script_button_url
-        };
-
-        // replace the placeholders with actual values
-        for (var key in construct) {
-            if (construct.hasOwnProperty(key)) {
-                data = replaceAll(data, key, construct[key]);
-                //data = data.replace(key, construct[key]);
-            }
-        }
-
-        // write the file
-        fs.writeFile('public/api/' + script.id + '.js', data, function (err) {
-            if (err) {
-                console.log('error writing script file')
-            }
-        });
-    });
-}
-
 
 module.exports = function (app) {
 
@@ -103,8 +65,7 @@ module.exports = function (app) {
                 console.log(err);
             }
 
-            // write script file
-            //constructScript(script);
+
 
             //var msg = 'Saved.';
             res.redirect('/script/edit/' + script.id);
