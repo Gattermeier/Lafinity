@@ -12,7 +12,7 @@ var middleware = require('./middleware');
 
 
 mongoose.set('debug', true);
-mongoose.connect('mongodb://localhost/modal', function (err) {
+mongoose.connect('mongodb://lafinity:lafinity@proximus.modulusmongo.net:27017/etedO6vy', function (err) {
   if (err) throw err;
 
   var app = express();
