@@ -10,6 +10,7 @@ var models = require('./models');
 var routes = require('./routes');
 var middleware = require('./middleware');
 
+var port = process.env.PORT || 3000;
 
 mongoose.set('debug', true);
 mongoose.connect('mongodb://lafinity:lafinity@proximus.modulusmongo.net:27017/etedO6vy', function (err) {
@@ -20,7 +21,8 @@ mongoose.connect('mongodb://lafinity:lafinity@proximus.modulusmongo.net:27017/et
   middleware(app);
   routes(app);
 
-  app.listen(3000, function () {
-    console.log('now listening on http://localhost:3000');
+  app.listen(port, function () {
+    console.log('Server running on port ' + process.env.PORT);
   })
 })
+
