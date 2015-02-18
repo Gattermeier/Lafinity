@@ -6,13 +6,6 @@ var mongoose = require('mongoose');
 var Script = mongoose.model('Script');
 var fs = require('fs');
 
-// implement replaceAll function missing in JavaScript
-// used by constuctScript function
-function replaceAll(str, search, replace) {
-    return str.replace(new RegExp(search, 'g'), replace);
-}
-
-
 module.exports = function (app) {
 
     app.get('/script', loggedIn, function (req, res) {

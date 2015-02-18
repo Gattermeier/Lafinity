@@ -16,7 +16,18 @@ module.exports = function(app) {
     })
 
     app.get('/admin/clients', loggedIn, isAdmin, function(req,res){
-        res.render('admin/clients.jade');
+
+        User.find('', function (err, users) {
+            if (err) return next(err);
+
+            if (!users) {
+                return invalid();
+            }
+            console.log(users);
+            res.render('admin/clients.jade', {users: users});
+        })
+
+
     })
 
     app.get('/admin/platform', loggedIn, isAdmin, function(req,res){

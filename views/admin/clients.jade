@@ -5,4 +5,6 @@ extends ../layout
 block content
    h1 Admin
    h3 Client Management
-   p admin area to manage all clients & edit their information including administrative roles.
+   if session.isAdmin
+      p admin area to manage all clients & edit their information including administrative roles.
+      p=users.fullname
