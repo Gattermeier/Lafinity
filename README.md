@@ -5,3 +5,8 @@ The project is still in its infancy.
 
 A development instance runs here:
 http://lafinity-43121.onmodulus.net 
+
+
+npm install
+
+node app.js
