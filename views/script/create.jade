@@ -19,8 +19,11 @@ block content
   script_button_classes = script ? script.script_button_classes : ''
   script_cookie_expiration = script ? script.script_cookie_expiration : '0'
   script_live = script ? script.id : ''
+  script_showonpages = script ? script.showonpages : 'show'
+  script_showforaudience = script ? script.showforaudience : 'all'
 
-  script(type="text/javascript").
+
+script(type="text/javascript").
     var preview = angular.module("preview",[]);
 
     preview.controller("previewController",function($scope){
@@ -40,11 +43,11 @@ block content
     div.col-xs-12.col-sm-6
       if message
         .info.alert.alert-success=message
-      .info.alert.alert-info Please add following line before the </body> closing tage to your page: < script src=' URL/public/lafinity.js?lf_id=#{script_live}'>< /script >
-
+      .info.alert.alert-info Please add following line before the &lt;/body&gt; closing tage to your page: &lt;script src='URL/public/lafinity.js?lf_id=#{script_live}'&gt;&lt;/script&gt;
+      .info.alert.alert-warning Make sure to include jquery, bootstrap in your page header.
       form(method="post", action=action)
 
-        h2 Configuration
+        h2 Info
         .row
           .form-group.col-xs-9.col-sm-9
             label(for="title") Name
@@ -54,13 +57,8 @@ block content
             class='form-control'
             )
 
-          .form-group.col-xs-6.col-sm-4
-            label(for="script_cookie_expiration") Freqency in hours
-            input#script_cookie_expiration(
-            name="script_cookie_expiration",
-            value=script_cookie_expiration,
-            class='form-control')
-          .form-group.col-xs-6.col-sm-6
+
+          //.form-group.col-xs-6.col-sm-6
             label Status
             .checkbox
               label
@@ -183,10 +181,22 @@ block content
           span.col-xs-12 to add: rules & conditions (returning visitors, etc), hide on pages, etc
           .form-group.col-xs-12.col-sm-5
             select.form-control(
-            name='show')
+            name='showforaudience')
+                option(value='all') all visitors
+                option(value='new') new visitors
+                option(value='returning') returning visitors
+          .form-group.col-xs-12.col-sm-5
+            select.form-control(
+            name='showonpages')
                 option(value='show') show on
                 option(value='hide') hide on
-            p following
+            p following pages ...
+          .form-group.col-xs-12.col-sm-5
+              label(for="script_cookie_expiration") Freqency in hours
+              input#script_cookie_expiration(
+              name="script_cookie_expiration",
+              value=script_cookie_expiration,
+              class='form-control')
 
         input(type="submit", value="Save", class="btn btn-primary")
     div.col-sm-6.hidden-xs.preview

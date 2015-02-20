@@ -1,12 +1,34 @@
-// Dependency Tests
 
-if (!window.jQuery) {
+/**
+ *  DEPENDENCY TESTS
+ *
+ *  https://code.jquery.com/jquery-2.1.3.min.js
+ *  http://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js
+ *  http://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css
+ *  https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js
+ *
+ */
+
+/**
+ * JQUERY
+ * */
+
+ if (!window.jQuery) {
     console.log('ops, no jquery..')
+
     // load jquery here..
+
+     var script_element = document.createElement('script');
+     script_element.src = 'https://code.jquery.com/jquery-2.1.3.min.js';
+     document.getElementsByTagName('head')[0].appendChild(script_element);
+
 } else {
     var jq = jQuery.noConflict();
 }
-
+/**
+ * BOOTSTRAP
+ *
+ */
 
 // Will be true if bootstrap 3 is loaded, false if bootstrap 2 or no bootstrap
 // this needs jquery..
