@@ -25,7 +25,7 @@ function proceed(value){
 
 if (qd.id) {
     var script_element = document.createElement('script');
-    script_element.src = 'http://localhost:3000/s/api/'+qd.id+'?callback=callback';
+    script_element.src = 'http://localhost:3000/public/api/'+qd.id+'.js?callback=callback';
     document.getElementsByTagName('head')[0].appendChild(script_element);
 }
 
