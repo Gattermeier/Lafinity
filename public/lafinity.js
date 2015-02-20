@@ -50,7 +50,7 @@ console.log(param);
 
 if (param.lf_id) {
     var script_element = document.createElement('script');
-    script_element.src = 'http://localhost:3000/public/api/'+param.lf_id+'.js?callback=callback';
+    script_element.src = 'http://lafinity.mod.bz/s/api/'+param.lf_id+'?callback=callback';
     document.getElementsByTagName('head')[0].appendChild(script_element);
 }
 
