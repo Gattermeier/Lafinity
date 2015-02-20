@@ -19,11 +19,8 @@ block content
   script_button_classes = script ? script.script_button_classes : ''
   script_cookie_expiration = script ? script.script_cookie_expiration : '0'
   script_live = script ? script.id : ''
-  script_showonpages = script ? script.showonpages : 'show'
-  script_showforaudience = script ? script.showforaudience : 'all'
 
-
-script(type="text/javascript").
+  script(type="text/javascript").
     var preview = angular.module("preview",[]);
 
     preview.controller("previewController",function($scope){
@@ -43,8 +40,8 @@ script(type="text/javascript").
     div.col-xs-12.col-sm-6
       if message
         .info.alert.alert-success=message
-      .info.alert.alert-info Please add following line before the &lt;/body&gt; closing tage to your page: &lt;script src='URL/public/lafinity.js?lf_id=#{script_live}'&gt;&lt;/script&gt;
-      .info.alert.alert-warning Make sure to include jquery, bootstrap in your page header.
+      .info.alert.alert-info Please add following line before the </body> closing tage to your page: < script src=' public/lafinity.js?lf_id=#{script_live}'></script >
+      .info.alert.alert-warning Dependencies: jquery, bootstrap
       form(method="post", action=action)
 
         h2 Info
@@ -58,7 +55,7 @@ script(type="text/javascript").
             )
 
 
-          //.form-group.col-xs-6.col-sm-6
+          .form-group.col-xs-6.col-sm-6
             label Status
             .checkbox
               label
@@ -176,28 +173,60 @@ script(type="text/javascript").
             label(for="url") Link
             input#script_button_text(name="url", value=text, class='form-control', ng-model='url', ng-init='script_button_text = url')
 
-        h2 Conditions
-        .row
-          span.col-xs-12 to add: rules & conditions (returning visitors, etc), hide on pages, etc
-          .form-group.col-xs-12.col-sm-5
-            select.form-control(
-            name='showforaudience')
-                option(value='all') all visitors
-                option(value='new') new visitors
-                option(value='returning') returning visitors
-          .form-group.col-xs-12.col-sm-5
-            select.form-control(
-            name='showonpages')
-                option(value='show') show on
-                option(value='hide') hide on
-            p following pages ...
-          .form-group.col-xs-12.col-sm-5
-              label(for="script_cookie_expiration") Freqency in hours
-              input#script_cookie_expiration(
-              name="script_cookie_expiration",
-              value=script_cookie_expiration,
-              class='form-control')
 
+        h2 Conditions
+        .info.alert.alert-warning Conditions not yet implemented
+        .row
+            .form-group.col-xs-12.col-sm-5
+                label(for="showforaudience") Show for audience
+                select.form-control(
+                name='showforaudience')
+                    option(value='all') all visitors
+                    option(value='new') new visitors
+                    option(value='returning') returning visitors
+
+            .form-group.col-xs-12.col-sm-5
+                label(for="script_cookie_expiration") Freqency in hours
+                input#script_cookie_expiration(
+                name="script_cookie_expiration",
+                value=script_cookie_expiration,
+                class='form-control')
+        .row
+            .form-group.col-xs-12
+                b Show on &nbsp;
+                input(type='checkbox')
+                | &nbsp;Mobile&nbsp;&nbsp;
+                input(type='checkbox')
+                | &nbsp;Tablet&nbsp;&nbsp;
+                input(type='checkbox')
+                | &nbsp;Desktop&nbsp;&nbsp;
+
+        .row
+            .form-group.col-xs-12.col-sm-12
+                label(for="showpagelist") Show on following pages
+                textarea#showpagelist(
+                name="showpagelist",
+                class='form-control')
+
+            .form-group.col-xs-12.col-sm-12
+                label(for="hidepagelist") Hide on following pages
+                textarea#hidepagelist(
+                name="hidepagelist",
+                class='form-control')
+
+        .row
+            .form-group.col-xs-12.col-sm-4
+                span Show this message after
+            .form-group.col-xs-2
+                select.form-control.col-xs-2(
+                name='showticker')
+                    option(value='1') 1
+                    option(value='2') 2
+            .form-group.col-xs-4
+                select.form-control.col-xs-2(
+                name='showtrigger')
+                    option(value='seconds') seconds
+                    option(value='pageviews') pageviews
         input(type="submit", value="Save", class="btn btn-primary")
     div.col-sm-6.hidden-xs.preview
       //h2 Preview
