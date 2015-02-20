@@ -13,9 +13,10 @@
     "jade": "~0.34.1",
     "mongoose": "~3.6.15",
     "mongoose-lifecycle": "^1.0.0",
-    "prototypes": "~0.3.2"
+    "prototypes": "~0.3.2",
+    "serve-favicon": "^2.2.0"
   },
-  "engines" : {
+  "engines": {
     "node": "0.12.x"
   }
 }

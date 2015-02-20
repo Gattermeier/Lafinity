@@ -4,6 +4,7 @@ extends ../layout
 block content
   action = script ? "/script/edit/"+script.id : "/script/create";
   title = script ? script.title : ''
+  exists = script ? script.id : '';
   script_title = script ? script.script_title : ''
   script_title_tag = script ? script.script_title_tag : 'H1'
   script_message = script ? script.script_message : ''
@@ -40,7 +41,8 @@ block content
     div.col-xs-12.col-sm-6
       if message
         .info.alert.alert-success=message
-      .info.alert.alert-info Please add following line before the </body> closing tage to your page: < script src=' public/lafinity.js?lf_id=#{script_live}'></script >
+      if exists
+        .info.alert.alert-info Please add following line before the </body> closing tage to your page: <br> &lt;script src='URL/public/lafinity.js?lf_id=#{script_live}'>&lt;/script >
       .info.alert.alert-warning Dependencies: jquery, bootstrap
       form(method="post", action=action)
 
@@ -228,18 +230,18 @@ block content
                     option(value='seconds') seconds
                     option(value='pageviews') pageviews
         input(type="submit", value="Save", class="btn btn-primary")
+
+    // PREVIEW
     div.col-sm-6.hidden-xs.preview
-      //h2 Preview
-      h3 Start typing to see the modal preview
-      p Please note: HTML elements do not yet fully preview (headline, button, etc)
-      div.backdrop
-        div.dialog
-          div.content
-            div.header
-              div(class='{{script_title_tag}}') {{script_title}}
-            div.body
-              p
-                img(ng-src="{{scope_script_image_url}}", class="img-responsive")
-              p {{scope_script_message}}
-            div.footer
-              a(href='#', class='btn {{script_button_align}} {{script_button_font}} {{script_button_color}}') {{script_button_text}}
+
+        div.backdrop
+            div.dialog
+              div.content
+                div.header
+                    div(class='{{script_title_tag}}') {{script_title}}
+                div.body
+                  p
+                    img(ng-src="{{scope_script_image_url}}", class="img-responsive")
+                  p {{scope_script_message}}
+                div.footer
+                  a(href='#', class='btn {{script_button_align}} {{script_button_font}} {{script_button_color}}') {{script_button_text}}
