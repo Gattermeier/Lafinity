@@ -42,7 +42,7 @@ block content
       if message
         .info.alert.alert-success=message
       if exists
-        .info.alert.alert-info Please add following line before the </body> closing tage to your page: <br> &lt;script src='URL/public/lafinity.js?lf_id=#{script_live}'>&lt;/script >
+        .info.alert.alert-info Please add following line before the </body> closing tage to your page: <br> &lt;script src='#{liveURL}/public/lafinity.js?lf_id=#{script_live}'>&lt;/script >
       .info.alert.alert-warning Dependencies: jquery, bootstrap
       form(method="post", action=action)
 

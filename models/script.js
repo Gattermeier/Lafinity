@@ -35,18 +35,20 @@ var schema = mongoose.Schema({
     // NEW
     , script_logic: {active: Boolean, expiration: Number}
 
+    , stats: Number
+
 })
 
 
 schema.statics.edit = function (req, callback) {
     var id = req.param('id');
-    console.log('user model, edit function, ID of req is: '+ id); // debug
+    //console.log('script (modal) model, edit function, ID of req is: '+ id); // debug
     var author = req.session.user;
 
     // validate current user authored this script
     // ToDO this should be probably be extended to user / author groups
     var query = { _id: id, author: author };
-    console.log(query); // debug
+    // console.log(query); // debug
 
     var update = {};
     update.title = req.param('title');
@@ -76,6 +78,29 @@ schema.statics.edit = function (req, callback) {
 
         callback();
     })
+}
+
+
+schema.statics.stats = function (req, stats, callback) {
+    var id = req.param('id');
+    var query = { _id: id };
+    if (stats === undefined) { stats = 1; } else {stats++;}
+    var update = {}
+    update.stats = stats;
+
+    this.update(query, update, function (err, numAffected) {
+        if (err) return callback(err);
+
+        if (0 === numAffected) {
+            return callback(new Error('no script to modify'));
+        }
+
+        callback();
+    })
+
+    // var statsUpdate = {calls: calls+1 }
+    console.log(stats);
+
 }
 
 // add created date property

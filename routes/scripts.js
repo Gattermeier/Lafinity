@@ -152,11 +152,27 @@ module.exports = function (app) {
     app.get("/s/api/:id", function (req, res, next) {
         var id = req.param('id');
 
+
+        /*Script.findOne({_id: id}, function (err, script) {
+            if (err) {
+                console.log('could not find in DB: ' + id + ' - ' + err)
+            } else {
+
+            }
+        })*/
+
         var query = Script.findById(id);
         query.exec(function (err, script) {
             if (err) return next(err);
 
             if (!script) return next(); // 404
+            var stats = script.stats;
+            console.log('Stats: '+stats);
+
+            Script.stats(req, stats, function (err) {
+                if (err) {console.log(err)};
+                console.log('stats call returned .. ');
+            })
 
             res.jsonp(script);
         })
