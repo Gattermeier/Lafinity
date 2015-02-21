@@ -1,4 +1,40 @@
-html,body { height:100%; }
+html,body { height:100%;
+    font-family: 'Raleway', Arial, sans-serif;
+}
+
+/** Codrop influenced styles **/
+
+.white {background: #fff;}
+.red {color: #c94e50;}
+
+
+.red-darkish {
+    background: #E85657;
+    color: #FAF1E0;}
+
+
+.red-dark{color:#BB4445;}
+
+
+.blue-dark { background-color: rgb(52, 73, 94);  }
+.blue-medium {background: #517cad;}
+.blue-light {background: #96BBE5;}
+.blue-verylight {color: #CFE6FF;}
+
+.background {backgrond: #FEF0E3;}
+.red-light {color: #E75854;}
+.brown-lightish {color:#D5BBA4;}
+
+
+.purple-dark {background: #553445;}
+.color {color: #FAF1E0;}
+
+
+.brown-dark {background: #BA997B;}
+.brown-light {color:#F9F6E5;}
+
+
+
 
 body {
     padding-top: 50px;
@@ -12,7 +48,7 @@ a:hover {
     /*text-align: center;*/
 }
 .preview {
-    border-left: 1px dotted #282828;
+    /*border-left: 1px dotted #282828;*/
     min-height:350px;
 }
 .preview .backdrop {

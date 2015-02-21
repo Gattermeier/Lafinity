@@ -41,9 +41,7 @@ block content
     div.col-xs-12.col-sm-6
       if message
         .info.alert.alert-success=message
-      if exists
-        .info.alert.alert-info Please add following line before the </body> closing tage to your page: <br> &lt;script src='#{liveURL}/public/lafinity.js?lf_id=#{script_live}'>&lt;/script >
-      .info.alert.alert-warning Dependencies: jquery, bootstrap
+
       form(method="post", action=action)
 
         h2 Info
@@ -233,7 +231,9 @@ block content
 
     // PREVIEW
     div.col-sm-6.hidden-xs.preview
-
+        if exists
+          .info.alert.alert-info Please add following line before the </body> closing tage to your page: <br> &lt;script src='#{liveURL}/public/lafinity.js?lf_id=#{script_live}'>&lt;/script >
+        .info.alert.alert-warning Dependencies: jquery, bootstrap
         div.backdrop
             div.dialog
               div.content

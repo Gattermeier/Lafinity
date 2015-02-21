@@ -4,19 +4,23 @@ extends ../layout
 
 block content
    if session.isLoggedIn
-      a.btn.btn-primary(href="/script/create") Create
+      a.btn.btn-primary(href="/script/create") Create new Marketing Overlay
 
       if !(scripts && scripts.length)
-         p No modal scripts yet created.
+         p No marketing overlays yet created.
       else
-         h3 Available Modals
+         h3 Existing Marketing Overlays
          .table.table-hover
             each script in scripts
                .row(style='margin-bottom:15px;')
-                  .col-xs-12.col-sm-6.col-md-5
-                     p= script.title
-                  .col-xs-12.col-sm-6.col-md-7
-                      p.btn.btn-default(style='margin-right:15px;') Called: #{script.stats}
+                  .col-xs-12.col-sm-6
+                      p(style='padding: 6px 0px;')= script.title
+                  .col-xs-4.col-sm-2
+                      if (script.stats)
+                          p.btn.btn-default(style='margin-right:15px;') Called: #{script.stats}
+                      else
+                          p.btn.btn-default(style='margin-right:15px;') Not called yet
+                  .col-xs-8.col-sm-4
                       a(href="/script/edit/#{script.id}", class='btn btn-warning', style='margin-right:5px;')
                         span.glyphicon.glyphicon-pencil(aria-hidden="true")
                         span &nbsp; View & Edit

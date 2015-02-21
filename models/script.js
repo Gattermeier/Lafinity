@@ -80,7 +80,7 @@ schema.statics.edit = function (req, callback) {
     })
 }
 
-
+// stats function, without priviledges save usage stats to entry
 schema.statics.stats = function (req, stats, callback) {
     var id = req.param('id');
     var query = { _id: id };
