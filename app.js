@@ -14,9 +14,10 @@ var port = process.env.PORT || 3000;
 
 var favicon = require('serve-favicon');
 
+// var mongoPath = 'mongodb://lafinity:lafinity@proximus.modulusmongo.net:27017/etedO6vy';
 
 mongoose.set('debug', true);
-mongoose.connect('mongodb://lafinity:lafinity@proximus.modulusmongo.net:27017/etedO6vy', function (err) {
+mongoose.connect('mongodb://127.0.0.1:27017/lafinity011', function (err) {
     if (err) { console.log(err) };
 
     var app = express();

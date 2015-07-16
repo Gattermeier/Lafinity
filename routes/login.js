@@ -22,12 +22,23 @@ module.exports = function (app) {
       return invalid();
     }
 
+
+
     User.findById(email, function (err, user) {
       if (err) return next(err);
 
       if (user) {
         return res.render('signup.jade', { exists: true });
       }
+
+
+      // User.find('', function(err, data) {
+      //     if (data.length < 1 || typeof data[0] === 'undefined') {
+      //       user.roles = ['admin'];
+      //     }
+      //     user.roles = [];
+      //   })
+
 
       crypto.randomBytes(16, function (err, bytes) {
         if (err) return next(err);
@@ -36,8 +47,7 @@ module.exports = function (app) {
         user.salt = bytes.toString('utf8');
         user.hash = hash(pass, user.salt);
         user.name = {first : first, last : last};
-        //user.roles = ['admin']; // messy way of signing up first user in db as admin.
-
+        user.roles = [];
 
         User.create(user, function (err, newUser) {
           if (err) {
@@ -52,13 +62,14 @@ module.exports = function (app) {
           req.session.user = email;
           req.session.fullname = user.name.first + ' ' + user.name.last;
           req.session.roles =  user.roles;
+
           if (req.session.roles.indexOf('admin') > -1) {
             req.session.isAdmin = true;
           } else {
             req.session.isAdmin = false;
           }
-            //req.session.fullname = fullname;
-          console.log('created user: %s', email);
+          //req.session.fullname = fullname;
+          // console.log('created user: %s', email);
           return res.redirect('/');
         })
       })
@@ -85,7 +96,7 @@ module.exports = function (app) {
     // user friendly
     email = email.toLowerCase();
 
-    // query mongodb
+    // query mongodb if user exists
     User.findById(email, function (err, user) {
       if (err) return next(err);
 
@@ -94,13 +105,13 @@ module.exports = function (app) {
       }
 
       // check pass
-      if (user.hash != hash(pass, user.salt)) {
+      if (user.hash !== hash(pass, user.salt)) {
         return invalid();
       }
 
       req.session.isLoggedIn = true;
       req.session.fullname = user.fullname;
-      req.session.user = email;
+      req.session.user = user.email;
       req.session.roles = user.roles;
 
       if (req.session.roles.indexOf('admin') > -1) {
