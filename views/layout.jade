@@ -44,9 +44,6 @@ html(lang='en')
                 a(href='/services') Services
               li
                 a(href='/tools') Tools
-              if session.isAdmin
-                li
-                  a(href='/rules/') Rules
               if session.isLoggedIn
                 li.dropdown
                   a(href="#",data-toggle="dropdown",role="button",aria-expanded="false").dropdown-toggle Your Products
@@ -55,10 +52,6 @@ html(lang='en')
                   ul(role="menu").dropdown-menu
                     li
                       a(href="/script") Marketing Overlays
-                    li
-                      a(href="/polls/") Polls
-                    li
-                      a(href="/mobile/") Mobile Footers
                     if session.isAdmin
                       li.divider
                       li

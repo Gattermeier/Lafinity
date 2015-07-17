@@ -148,18 +148,9 @@ module.exports = function (app) {
         })
     })
 
-    // API calls
+    // API calls (Note: this is called from /public/lafinity.js which builds the client side script)
     app.get("/s/api/:id", function (req, res, next) {
         var id = req.param('id');
-
-
-        /*Script.findOne({_id: id}, function (err, script) {
-            if (err) {
-                console.log('could not find in DB: ' + id + ' - ' + err)
-            } else {
-
-            }
-        })*/
 
         var query = Script.findById(id);
         query.exec(function (err, script) {
