@@ -1,4 +1,5 @@
 var errors = require('./errors');
+var setup = require('./setup');
 var user = require('./user');
 var login = require('./login');
 var admin = require('./admin');
@@ -15,6 +16,7 @@ var test = require('./test');
 var mongoose = require('mongoose');
 
 var isAdmin = require('../middleware/isAdmin');
+var isLoggedIn = require('../middleware/loggedin');
 
 
 //var BlogPost = mongoose.model('BlogPost');
@@ -53,6 +55,9 @@ module.exports = function (app) {
   // user routes
   user(app);
 
+  // setup routes
+  setup(app);
+
   // admin routes
   admin(app);
 
@@ -72,7 +77,7 @@ module.exports = function (app) {
   modal(app);
 
   // routes for testing
-  test(app);
+  // test(app);
 
   // error handlers
   errors(app);

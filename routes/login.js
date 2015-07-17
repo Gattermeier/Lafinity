@@ -32,14 +32,6 @@ module.exports = function (app) {
       }
 
 
-      // User.find('', function(err, data) {
-      //     if (data.length < 1 || typeof data[0] === 'undefined') {
-      //       user.roles = ['admin'];
-      //     }
-      //     user.roles = [];
-      //   })
-
-
       crypto.randomBytes(16, function (err, bytes) {
         if (err) return next(err);
 
@@ -111,7 +103,7 @@ module.exports = function (app) {
 
       req.session.isLoggedIn = true;
       req.session.fullname = user.fullname;
-      req.session.user = user.email;
+      req.session.user = email;
       req.session.roles = user.roles;
 
       if (req.session.roles.indexOf('admin') > -1) {
