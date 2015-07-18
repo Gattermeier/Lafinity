@@ -5,14 +5,14 @@ var cleanString = require('../helpers/cleanString');
 var hash = require('../helpers/hash');
 var crypto = require('crypto');
 
-module.exports = function (app) {
+module.exports = function(app) {
 
-  app.get('/signup', function (req, res) {
+  app.get('/signup', function(req, res) {
     res.render('signup.jade');
   });
 
   // create new account
-  app.post('/signup', function (req, res, next) {
+  app.post('/signup', function(req, res, next) {
     var email = cleanString(req.param('email'));
     var pass = cleanString(req.param('pass'));
     var first = cleanString(req.param('firstname'));
@@ -24,24 +24,31 @@ module.exports = function (app) {
 
 
 
-    User.findById(email, function (err, user) {
+    User.findById(email, function(err, user) {
       if (err) return next(err);
 
       if (user) {
-        return res.render('signup.jade', { exists: true });
+        return res.render('signup.jade', {
+          exists: true
+        });
       }
 
 
-      crypto.randomBytes(16, function (err, bytes) {
+      crypto.randomBytes(16, function(err, bytes) {
         if (err) return next(err);
 
-        var user = { _id: email };
+        var user = {
+          _id: email
+        };
         user.salt = bytes.toString('utf8');
         user.hash = hash(pass, user.salt);
-        user.name = {first : first, last : last};
+        user.name = {
+          first: first,
+          last: last
+        };
         user.roles = [];
 
-        User.create(user, function (err, newUser) {
+        User.create(user, function(err, newUser) {
           if (err) {
             if (err instanceof mongoose.Error.ValidationError) {
               return invalid();
@@ -53,7 +60,7 @@ module.exports = function (app) {
           req.session.isLoggedIn = true;
           req.session.user = email;
           req.session.fullname = user.name.first + ' ' + user.name.last;
-          req.session.roles =  user.roles;
+          req.session.roles = user.roles;
 
           if (req.session.roles.indexOf('admin') > -1) {
             req.session.isAdmin = true;
@@ -67,17 +74,19 @@ module.exports = function (app) {
       })
     })
 
-    function invalid () {
-      return res.render('signup.jade', { invalid: true });
+    function invalid() {
+      return res.render('signup.jade', {
+        invalid: true
+      });
     }
   });
 
 
-  app.get('/login', function (req, res) {
+  app.get('/login', function(req, res) {
     res.render('login.jade');
   })
 
-  app.post('/login', function (req, res, next) {
+  app.post('/login', function(req, res, next) {
     // validate input
     var email = cleanString(req.param('email'));
     var pass = cleanString(req.param('pass'));
@@ -89,7 +98,7 @@ module.exports = function (app) {
     email = email.toLowerCase();
 
     // query mongodb if user exists
-    User.findById(email, function (err, user) {
+    User.findById(email, function(err, user) {
       if (err) return next(err);
 
       if (!user) {
@@ -116,16 +125,18 @@ module.exports = function (app) {
       res.redirect('/');
     })
 
-    function invalid () {
-      return res.render('login.jade', { invalid: true });
+    function invalid() {
+      return res.render('login.jade', {
+        invalid: true
+      });
     }
   })
 
-  app.get('/logout', function (req, res) {
-      req.session.isAdmin = false;
-      req.session.isLoggedIn = false;
-      req.session.user = null;
-      req.session.roles = null;
-      res.redirect('/'); // maybe redirect here to some upsell page ..
+  app.get('/logout', function(req, res) {
+    req.session.isAdmin = false;
+    req.session.isLoggedIn = false;
+    req.session.user = null;
+    req.session.roles = null;
+    res.redirect('/'); // maybe redirect here to some upsell page ..
   })
 }

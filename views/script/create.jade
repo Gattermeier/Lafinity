@@ -2,30 +2,30 @@
 extends ../layout
 
 block content
-  action = script ? "/script/edit/"+script.id : "/script/create";
-  title = script ? script.title : ''
-  exists = script ? script.id : '';
-  script_title = script ? script.script_title : ''
-  script_title_tag = script ? script.script_title_tag : 'H1'
-  script_message = script ? script.script_message : ''
-  script_image_url = script ? script.script_image_url : ''
-  script_image_position = script ? script.script_image_position : 'top'
-  script_button_text = script ? script.script_button_text : ''
-  script_link_httptype = script ? script.script_link_httptype : 'http://'
-  script_button_url = script ? script.script_button_url : ''
-  script_button_align = script ? script.script_button_align : 'btn-block'
-  script_button_color = script ? script.script_button_color : 'btn-danger'
-  script_button_font = script ? script.script_button_font : 'default'
-  script_button_tag = script ? script.script_button_tag : ''
-  script_button_classes = script ? script.script_button_classes : ''
-  script_cookie_expiration = script ? script.script_cookie_expiration : '0'
-  script_live = script ? script.id : ''
+  -var action = script ? "/script/edit/"+script.id : "/script/create";
+  -var title = script ? script.title : ''
+  -var exists = script ? script.id : '';
+  -var script_title = script ? script.script_title : ''
+  -var script_title_tag = script ? script.script_title_tag : 'H1'
+  -var script_message = script ? script.script_message : ''
+  -var script_image_url = script ? script.script_image_url : ''
+  -var script_image_position = script ? script.script_image_position : 'top'
+  -var script_button_text = script ? script.script_button_text : ''
+  -var script_link_httptype = script ? script.script_link_httptype : 'http://'
+  -var script_button_url = script ? script.script_button_url : ''
+  -var script_button_align = script ? script.script_button_align : 'btn-block'
+  -var script_button_color = script ? script.script_button_color : 'btn-danger'
+  -var script_button_font = script ? script.script_button_font : 'default'
+  -var script_button_tag = script ? script.script_button_tag : ''
+  -var script_button_classes = script ? script.script_button_classes : ''
+  -var script_cookie_expiration = script ? script.script_cookie_expiration : '0'
+  -var script_live = script ? script.id : ''
 
   script(type="text/javascript").
     var preview = angular.module("preview",[]);
 
     preview.controller("previewController",function($scope){
-      $scope.scope_script_title = "#{script_title}";
+      $scope.scope_script_title = "#{script_title}";@
       $scope.scope_script_title_tag = "#{script_title_tag}";
       $scope.scope_script_message = "#{script_message}";
       $scope.scope_script_image_url = "#{script_image_url}";

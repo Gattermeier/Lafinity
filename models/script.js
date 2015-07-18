@@ -7,47 +7,73 @@ var createdDate = require('../plugins/createdDate');
 
 // define the schema
 var schema = mongoose.Schema({
-    title: { type: String, trim: true }
+    title: {
+        type: String,
+        trim: true
+    }
     //, body: String
-    , author: { type: String, ref: 'User' }
+    ,
+    author: {
+        type: String,
+        ref: 'User'
+    }
 
     // script content
-    , script_title: String
-    , script_title_tag: String
-    , script_image_url : String
-    , script_image_position: String
-    , script_message: String
-    , script_button_text: String
-    , script_button_url: String
-    , script_button_tag: String
-    , script_button_align : String
-    , script_button_color : String
-    , script_button_font : String
-    , script_link_httptype: String
+    ,
+    script_title: String,
+    script_title_tag: String,
+    script_image_url: String,
+    script_image_position: String,
+    script_message: String,
+    script_button_text: String,
+    script_button_url: String,
+    script_button_tag: String,
+    script_button_align: String,
+    script_button_color: String,
+    script_button_font: String,
+    script_link_httptype: String
 
     // NEW
-    , script_button: {text: String, url: {http : String, target: String}, tag: String, classes: String}
+    ,
+    script_button: {
+        text: String,
+        url: {
+            http: String,
+            target: String
+        },
+        tag: String,
+        classes: String
+    }
 
     // script logic
-    , script_active: Boolean
-    , script_cookie_expiration: Number
+    ,
+    script_active: Boolean,
+    script_cookie_expiration: Number
 
     // NEW
-    , script_logic: {active: Boolean, expiration: Number}
+    ,
+    script_logic: {
+        active: Boolean,
+        expiration: Number
+    }
 
-    , stats: Number
+    ,
+    stats: Number
 
 })
 
 
-schema.statics.edit = function (req, callback) {
+schema.statics.edit = function(req, callback) {
     var id = req.param('id');
     //console.log('script (modal) model, edit function, ID of req is: '+ id); // debug
     var author = req.session.user;
 
     // validate current user authored this script
     // ToDO this should be probably be extended to user / author groups
-    var query = { _id: id, author: author };
+    var query = {
+        _id: id,
+        author: author
+    };
     // console.log(query); // debug
 
     var update = {};
@@ -69,7 +95,7 @@ schema.statics.edit = function (req, callback) {
     update.script_button_font = req.param('script_button_font');
     update.script_link_httptype = req.param('script_link_httptype');
 
-    this.update(query, update, function (err, numAffected) {
+    this.update(query, update, function(err, numAffected) {
         if (err) return callback(err);
 
         if (0 === numAffected) {
@@ -81,14 +107,20 @@ schema.statics.edit = function (req, callback) {
 }
 
 // stats function, without priviledges save usage stats to entry
-schema.statics.stats = function (req, stats, callback) {
+schema.statics.stats = function(req, stats, callback) {
     var id = req.param('id');
-    var query = { _id: id };
-    if (stats === undefined) { stats = 1; } else {stats++;}
+    var query = {
+        _id: id
+    };
+    if (stats === undefined) {
+        stats = 1;
+    } else {
+        stats++;
+    }
     var update = {}
     update.stats = stats;
 
-    this.update(query, update, function (err, numAffected) {
+    this.update(query, update, function(err, numAffected) {
         if (err) return callback(err);
 
         if (0 === numAffected) {

@@ -3,5 +3,6 @@
 extends layout
 
 block content
-   if session.isLoggedIn
+  if session.isLoggedIn
+    div(style='min-height: 250px;')
       .error.alert.alert-danger Error, seems you don't have the permission to do that ..

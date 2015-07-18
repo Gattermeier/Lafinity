@@ -1,5 +1,6 @@
 /**
  * Created by matthias on 1/7/15.
+ * This is not yet in use
  */
 
 var mongoose = require('mongoose');
@@ -7,27 +8,36 @@ var createdDate = require('../plugins/createdDate');
 
 // define the schema
 var schema = mongoose.Schema({
-    title: { type: String, trim: true }
-    , body: String
-    , author: { type: String, ref: 'User' }
+    title: {
+        type: String,
+        trim: true
+    },
+    body: String,
+    author: {
+        type: String,
+        ref: 'User'
+    }
     //, position: String
 })
 
 
-schema.statics.edit = function (req, callback) {
+schema.statics.edit = function(req, callback) {
     var id = req.param('id');
     var author = req.session.user;
 
     // validate current user authored
     // ToDO this should be probably be extended to user / author groups
-    var query = { _id: id, author: author };
+    var query = {
+        _id: id,
+        author: author
+    };
 
     var update = {};
     update.title = req.param('title');
     //update.body = req.param('body');
     //update.position = req.param('position');
 
-    this.update(query, update, function (err, numAffected) {
+    this.update(query, update, function(err, numAffected) {
         if (err) return callback(err);
 
         if (0 === numAffected) {
