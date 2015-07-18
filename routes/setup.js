@@ -7,7 +7,7 @@ var crypto = require('crypto');
 
 module.exports = function(app) {
 
-  app.get("/setup", function (req, res) {
+  app.get("/setup", function(req, res) {
     User.find('', function(err, user) {
       if (user.length < 1 || typeof user[0] === 'undefined') {
         console.log('setup init ..');
@@ -15,32 +15,33 @@ module.exports = function(app) {
       } else {
         console.log('already setup..');
         res.redirect('/');
-      } 
+      }
     })
-
   });
 
-  app.post("/setup", function (req, res, next) {
-
+  app.post("/setup", function(req, res, next) {
     var email = cleanString(req.param('email'));
     var pass = cleanString(req.param('pass'));
     var first = cleanString(req.param('firstname'));
     var last = cleanString(req.param('lastname'));
-
     if (!(email && pass)) {
       return invalid();
     }
-
-    crypto.randomBytes(16, function (err, bytes) {
+    crypto.randomBytes(16, function(err, bytes) {
       if (err) return next(err);
 
-      var user = { _id: email };
+      var user = {
+        _id: email
+      };
       user.salt = bytes.toString('utf8');
       user.hash = hash(pass, user.salt);
-      user.name = {first : first, last : last};
+      user.name = {
+        first: first,
+        last: last
+      };
       user.roles = ['admin'];
 
-      User.create(user, function (err, newUser) {
+      User.create(user, function(err, newUser) {
         if (err) {
           if (err instanceof mongoose.Error.ValidationError) {
             return invalid();
@@ -52,7 +53,7 @@ module.exports = function(app) {
         req.session.isLoggedIn = true;
         req.session.user = email;
         req.session.fullname = user.name.first + ' ' + user.name.last;
-        req.session.roles =  user.roles;
+        req.session.roles = user.roles;
 
         if (req.session.roles.indexOf('admin') > -1) {
           req.session.isAdmin = true;
