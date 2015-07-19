@@ -39,7 +39,7 @@ module.exports = function(app) {
         var script_button_color = req.param('script_button_color');
         var script_button_font = req.param('script_button_font');
         var script_link_httptype = req.param('script_link_httptype');
-        var script_cookie_expiration = req.param('script_cookie_expiration');
+        //var script_cookie_expiration = req.param('script_cookie_expiration');
         var user = req.session.user;
 
         Script.create({
@@ -56,7 +56,7 @@ module.exports = function(app) {
             script_button_font: script_button_font,
             script_button_align: script_button_align,
             script_link_httptype: script_link_httptype,
-            script_cookie_expiration: script_cookie_expiration
+            //script_cookie_expiration: script_cookie_expiration
         }, function(err, script) {
             if (err) {
                 console.log(err);
