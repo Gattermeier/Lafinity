@@ -1,4 +1,5 @@
 - var pathToAssets = '/public'
+- var assets = '/assets'
 - var liveURL = 'http://api.lafinity.com'
 
 doctype html
@@ -13,6 +14,10 @@ html(lang='en')
     title=pageTitle
     // Bootstrap core CSS
     link(href='#{pathToAssets}/bootstrap-3.2.0/dist/css/bootstrap.min.css', rel='stylesheet')
+    link(href='/assets/bootstrap-flat/css/bootstrap-flat.min.css', rel='stylesheet')
+    link(href='/assets/bootstrap-flat/css/bootstrap-flat-extras.min.css', rel='stylesheet')
+    link(href='http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css', rel='stylesheet')
+
     // Custom styles for this template
     link(href='#{pathToAssets}/css/styles.css', rel='stylesheet')
     // Just for debugging purposes. Don't actually copy these 2 lines!
@@ -100,3 +105,13 @@ html(lang='en')
     // Placed at the end of the document so the pages load faster
     script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js')
     script(src='//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js')
+    script(type="text/javascript").
+      $(document).ready(function() {
+        $('.btnNext').click(function(){
+          $('.nav-pills > .active').next('li').find('a').trigger('click');
+        });
+
+        $('.btnPrevious').click(function(){
+          $('.nav-pills > .active').prev('li').find('a').trigger('click');
+        });
+      });

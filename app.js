@@ -17,7 +17,6 @@ var port = process.env.PORT || 3000;
 var favicon = require('serve-favicon');
 
 
-// mongoose.set('debug', true);
 mongoose.connect(config, function(err) {
   if (err) {
     console.log(err)
@@ -25,6 +24,7 @@ mongoose.connect(config, function(err) {
 
   app.use(favicon(__dirname + '/public/favicon.ico'));
   app.use("/public", express.static(path.join(__dirname, 'public')));
+  app.use("/assets", express.static(path.join(__dirname, 'bower_components')));
 
   middleware(app);
   routes(app);
