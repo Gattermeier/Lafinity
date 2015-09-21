@@ -4,7 +4,7 @@ Lafinity is a start-up idea for a third party library / SaaS similar to Disqus, 
 The project is still in its infancy. 
 
 A development instance runs here:  
-http://lafinity-43121.onmodulus.net
+http://lafinity-43121.onmodulus.net  
 http://www.lafinity.io
 
 npm install  
